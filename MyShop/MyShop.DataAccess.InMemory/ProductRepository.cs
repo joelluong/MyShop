@@ -10,7 +10,7 @@ namespace MyShop.DataAccess.InMemory
 {
     using MyShop.Core.Models;
 
-    class ProductRepository
+    public class ProductRepository
     {
         ObjectCache cache = MemoryCache.Default;
         List<Product> products;
@@ -18,6 +18,7 @@ namespace MyShop.DataAccess.InMemory
         public ProductRepository()
         {
             this.products = this.cache["products"] as List<Product>;
+
             if (this.products == null)
             {
                 this.products = new List<Product>();
