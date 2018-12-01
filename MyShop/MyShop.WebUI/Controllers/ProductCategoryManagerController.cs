@@ -8,7 +8,7 @@ using MyShop.DataAccess.InMemory;
 
 namespace MyShop.WebUI.Controllers
 {
-    using MyShop.Core.Contracts;
+    using MyShop.Core.Contacts;
 
     public class ProductCategoryManagerController : Controller
     {

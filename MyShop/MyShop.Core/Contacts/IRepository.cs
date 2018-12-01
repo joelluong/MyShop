@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyShop.Core.Contracts
+namespace MyShop.Core.Contacts
 {
     using MyShop.Core.Models;
 
