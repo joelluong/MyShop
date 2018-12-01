@@ -10,6 +10,7 @@ using MyShop.Core.Contacts;
 
 namespace MyShop.WebUI.Controllers
 {
+    using System.IO;
 
     public class ProductManagerController : Controller
     {
@@ -42,7 +43,7 @@ namespace MyShop.WebUI.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(Product product)
+        public ActionResult Create(Product product, HttpPostedFileBase file)
         {
             if (!ModelState.IsValid)
             {
@@ -50,6 +51,12 @@ namespace MyShop.WebUI.Controllers
             }
             else
             {
+
+                if (file != null)
+                {
+                    product.Image = product.Id + Path.GetExtension(file.FileName);
+                    file.SaveAs(Server.MapPath("//Content//ProductImages//")+product.Image);
+                }
                 this.context.Insert(product);
                 this.context.Commit();
 
@@ -75,7 +82,7 @@ namespace MyShop.WebUI.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(Product product, string Id)
+        public ActionResult Edit(Product product, string Id, HttpPostedFileBase file)
         {
             Product productToEdit = this.context.Find(Id);
 
@@ -90,9 +97,14 @@ namespace MyShop.WebUI.Controllers
                     return this.View(product);
                 }
 
+                if (file != null)
+                {
+                    productToEdit.Image = product.Id + Path.GetExtension(file.FileName);
+                    file.SaveAs(Server.MapPath("//Content//ProductImages//") + productToEdit.Image);
+                }
+
                 productToEdit.Category = product.Category;
                 productToEdit.Description = product.Description;
-                productToEdit.Image = product.Image;
                 productToEdit.Name = product.Name;
                 productToEdit.Price = product.Price;
 
