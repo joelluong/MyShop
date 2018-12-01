@@ -8,6 +8,7 @@ namespace MyShop.WebUI.Controllers
 {
     using MyShop.Core.Contacts;
     using MyShop.Core.Models;
+    using MyShop.Core.ViewModels;
 
     public class HomeController : Controller
     {
@@ -21,11 +22,26 @@ namespace MyShop.WebUI.Controllers
             productCategories = productCategoryContext;
         }
 
-        public ActionResult Index()
+        public ActionResult Index(string Category=null)
         {
-            List<Product> products = this.context.Collection().ToList();
+            List<Product> products;
 
-            return View(products);
+            List<ProductCategory> categories = this.productCategories.Collection().ToList();
+
+            if (Category == null)
+            {
+                products = this.context.Collection().ToList();
+            }
+            else
+            {
+                products = this.context.Collection().Where(p => p.Category == Category).ToList();
+            }
+
+            ProductListViewModel model = new ProductListViewModel();
+            model.Products = products;
+            model.ProductCategories = categories;
+
+            return View(model);
         }
 
         public ActionResult Details(string Id)
