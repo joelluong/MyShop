@@ -12,7 +12,7 @@ This project is My Shop eCommerce which I used ASP.NET to create. This web appli
 
 The following photo is the Home page:
 
-![alt text](Images/screenshot.PNG)
+![alt text](images/screenshot.PNG)
 
 ## Dependencies
 
